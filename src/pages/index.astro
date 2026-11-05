@@ -1,0 +1,51 @@
+---
+import Header from "../components/Header.astro";
+import Hero from "../components/Hero.astro";
+import Projects from "../components/Projects.astro";
+import Video from "../components/Video.astro";
+import Experience from "../components/Experience.astro";
+import Education from "../components/Education.astro";
+import Footer from "../components/Footer.astro";
+import { siteConfig } from "../config";
+import "../styles/global.css";
+
+const titulo = `${siteConfig.nombre} · ${siteConfig.encabezado}`;
+---
+
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={siteConfig.descripcion} />
+    <meta name="theme-color" content="#faf7fd" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={titulo} />
+    <meta property="og:description" content={siteConfig.descripcion} />
+    <meta property="og:locale" content="es_PE" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <title>{titulo}</title>
+  </head>
+  <body>
+    <a
+      href="#contenido"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[60] focus:rounded-full focus:bg-violeta focus:px-4 focus:py-2 focus:text-white"
+      >Saltar al contenido</a
+    >
+    <Header />
+    <main id="contenido">
+      <Hero />
+      <Projects />
+      <Video />
+      <Experience />
+      <Education />
+    </main>
+    <Footer />
+  </body>
+</html>

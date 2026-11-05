@@ -1,0 +1,56 @@
+---
+import { siteConfig } from "../config";
+import TituloSeccion from "./TituloSeccion.astro";
+
+const { formacion, herramientas, idiomas } = siteConfig;
+---
+
+{
+  formacion.length > 0 && (
+    <section id="formacion" class="border-t border-lila-borde/70 py-16 md:py-24">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6">
+        <TituloSeccion titulo="Formación" />
+        <div class="grid gap-6 lg:grid-cols-2">
+          {formacion.map((f) => (
+            <article class="rounded-2xl border border-lila-borde bg-white p-5 sm:p-8">
+              <div class="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">
+                <h3 class="text-xl font-bold text-tinta">{f.titulo}</h3>
+                {f.periodo && <p class="text-sm font-medium whitespace-nowrap text-tinta-suave">{f.periodo}</p>}
+              </div>
+              <p class="mt-1 font-semibold text-violeta">{f.institucion}</p>
+              <ul class="mt-5 space-y-3">
+                {f.detalles.map((d) => (
+                  <li class="flex gap-3 leading-relaxed text-tinta-suave">
+                    <span class="mt-2.5 size-1.5 shrink-0 rounded-full bg-violeta" aria-hidden="true" />
+                    <span>{d}</span>
+                  </li>
+                ))}
+              </ul>
+            </article>
+          ))}
+
+          {(herramientas.length > 0 || idiomas.length > 0) && (
+            <article class="rounded-2xl border border-lila-borde bg-white p-5 sm:p-8">
+              <h3 class="text-xl font-bold text-tinta">Herramientas</h3>
+              <ul class="mt-5 flex flex-wrap gap-2">
+                {herramientas.map((h) => (
+                  <li class="rounded-full bg-lila px-3 py-1.5 text-sm font-medium text-tinta">{h}</li>
+                ))}
+              </ul>
+              {idiomas.length > 0 && (
+                <>
+                  <h3 class="mt-8 text-xl font-bold text-tinta">Idiomas</h3>
+                  <ul class="mt-3 space-y-1 text-tinta-suave">
+                    {idiomas.map((i) => (
+                      <li>{i}</li>
+                    ))}
+                  </ul>
+                </>
+              )}
+            </article>
+          )}
+        </div>
+      </div>
+    </section>
+  )
+}

@@ -1,0 +1,27 @@
+---
+import { siteConfig } from "../config";
+
+const anio = new Date().getFullYear();
+const enlace = "inline-flex min-h-11 items-center font-medium text-violeta underline-offset-4 hover:underline";
+---
+
+<footer class="bg-lila">
+  <div
+    class="mx-auto flex max-w-6xl flex-col gap-4 px-4 py-10 sm:px-6 md:flex-row md:items-center md:justify-between"
+  >
+    <div>
+      <p class="font-semibold text-tinta">{siteConfig.nombre}</p>
+      <p class="mt-1 text-sm text-tinta-suave">
+        © {anio} · Hecho con Astro a partir de la plantilla
+        <a href="https://github.com/RyanFitzgerald/devportfolio" target="_blank" rel="noopener noreferrer" class="text-violeta underline underline-offset-2"
+          >devportfolio</a
+        > (MIT).
+      </p>
+    </div>
+    <ul class="flex flex-wrap gap-x-5">
+      {siteConfig.redes.github && <li><a href={siteConfig.redes.github} target="_blank" rel="noopener noreferrer" class={enlace}>GitHub</a></li>}
+      {siteConfig.redes.linkedin && <li><a href={siteConfig.redes.linkedin} target="_blank" rel="noopener noreferrer" class={enlace}>LinkedIn</a></li>}
+      {siteConfig.cv && <li><a href={siteConfig.cv} target="_blank" rel="noopener" class={enlace}>CV (PDF)</a></li>}
+    </ul>
+  </div>
+</footer>

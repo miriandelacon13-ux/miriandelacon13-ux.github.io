@@ -1,0 +1,100 @@
+---
+import { siteConfig } from "../config";
+import Icono from "./Icono.astro";
+import TituloSeccion from "./TituloSeccion.astro";
+
+const v = siteConfig.video;
+---
+
+{
+  v && (
+    <section id="video" class="bg-lila/70 py-16 md:py-24">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6">
+        <TituloSeccion titulo="Video" />
+
+        <div class="grid items-center gap-8 md:grid-cols-[minmax(0,300px)_1fr] md:gap-12">
+          <div class="mx-auto w-full max-w-[300px]">
+            {v.youtubeId ? (
+              <div class="aspect-[9/16] overflow-hidden rounded-2xl border border-lila-borde bg-tinta">
+                <iframe
+                  src={`https://www.youtube-nocookie.com/embed/${v.youtubeId}`}
+                  title={v.titulo}
+                  loading="lazy"
+                  allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen
+                  class="size-full"
+                />
+              </div>
+            ) : v.mp4 ? (
+              <video
+                controls
+                playsinline
+                preload="metadata"
+                poster={v.miniatura.src}
+                width={v.mp4.ancho}
+                height={v.mp4.alto}
+                aria-label={v.titulo}
+                class="aspect-[9/16] h-auto w-full rounded-2xl border border-lila-borde bg-tinta"
+              >
+                <source src={v.mp4.src} type="video/mp4" />
+                <a href={v.mp4.src}>Descargar el reel en MP4</a>
+              </video>
+            ) : (
+              <a
+                href={v.enlaces[0]?.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="group relative block overflow-hidden rounded-2xl border border-lila-borde"
+              >
+                <img
+                  src={v.miniatura.src}
+                  alt={v.miniatura.alt}
+                  width={v.miniatura.ancho}
+                  height={v.miniatura.alto}
+                  loading="lazy"
+                  decoding="async"
+                  class="h-auto w-full"
+                />
+                <span class="absolute inset-0 flex items-center justify-center">
+                  <span class="flex size-16 items-center justify-center rounded-full bg-white/95 text-violeta shadow-lg transition-transform group-hover:scale-105">
+                    <Icono nombre="video" class="size-7 translate-x-0.5" />
+                  </span>
+                </span>
+                <span class="sr-only">Ver el reel (se abre en otra pestaña)</span>
+              </a>
+            )}
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold tracking-tight text-balance text-tinta">{v.titulo}</h3>
+            <p class="mt-4 max-w-[60ch] leading-relaxed text-tinta-suave sm:text-lg">{v.descripcion}</p>
+            <p class="mt-4 max-w-[60ch] rounded-xl border border-lila-borde bg-white px-4 py-3 text-tinta">
+              <strong class="font-semibold">Voz generada con IA.</strong> {v.aviso}
+            </p>
+            {v.creditos && <p class="mt-3 text-sm text-tinta-suave">{v.creditos}</p>}
+            <ul class="mt-6 flex flex-wrap gap-3">
+              {v.enlaces.map((e, i) => (
+                <li>
+                  <a
+                    href={e.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class:list={[
+                      "inline-flex min-h-11 items-center gap-2 rounded-full px-5 font-semibold transition-colors",
+                      i === 0
+                        ? "bg-violeta text-white hover:bg-violeta-oscuro"
+                        : "border border-violeta/40 bg-white text-violeta hover:bg-lila",
+                    ]}
+                  >
+                    {e.etiqueta}
+                    <span class="sr-only"> (se abre en otra pestaña)</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
