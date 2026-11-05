@@ -69,7 +69,7 @@ const v = siteConfig.video;
             <h3 class="text-2xl font-bold tracking-tight text-balance text-tinta">{v.titulo}</h3>
             <p class="mt-4 max-w-[60ch] leading-relaxed text-tinta-suave sm:text-lg">{v.descripcion}</p>
             <p class="mt-4 max-w-[60ch] rounded-xl border border-lila-borde bg-white px-4 py-3 text-tinta">
-              <strong class="font-semibold">Voz generada con IA.</strong> {v.aviso}
+              <strong class="font-semibold">Voz generada con IA.</strong>{" "}{v.aviso}
             </p>
             {v.creditos && <p class="mt-3 text-sm text-tinta-suave">{v.creditos}</p>}
             <ul class="mt-6 flex flex-wrap gap-3">
